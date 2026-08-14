@@ -1,9 +1,29 @@
+import { useRef } from "react";
+import Dialog from "../components/dialog";
+import Button from "../components/ui/button";
 
 export default function Home() {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+
+  const onClose = () => {
+    if (!dialogRef.current) return
+    dialogRef.current.close()
+  }
+  const onOpen = () => {
+    if (!dialogRef.current) return
+    dialogRef.current.showModal()
+  }
+
+
+
+
   return (
-    <div>
-      <h1>Home Page</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam doloribus eaque praesentium qui aut officia nisi, laboriosam in adipisci velit?</p>
+    <div className="p-10">
+
+      <Button onClick={onOpen}>Edit Tags</Button>
+
+      <Dialog ref={dialogRef}  onClose={onClose}  />
+
     </div>
   )
 }
