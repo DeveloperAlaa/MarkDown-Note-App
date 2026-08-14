@@ -13,7 +13,7 @@ export default function Dialog({ ref, onClose }: DialogProps) {
             <header className="flex justify-between items-center">
                 <h3>Edit Tags</h3>
 
-                <button aria-label="Close Dialog" className="cursor-pointer" onClick={onClose}>
+                <button aria-label="Close Dialog" className="cursor-pointer text-gray" onClick={onClose}>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
