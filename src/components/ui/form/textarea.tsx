@@ -1,19 +1,19 @@
-import { useId } from "react"
+import { useId, type TextareaHTMLAttributes } from "react"
+import { cn } from "../../../utils/cn"
 
-type InputProps = {
-    label: string,
-}
+type InputProps = TextareaHTMLAttributes<HTMLTextAreaElement>
 
 
-export default function TextArea({ label }: InputProps) {
+export default function TextArea({ className, ...props }: InputProps) {
 
     const inputId = `input-${useId()}`
 
     return (
-        <div className="flex flex-col gap-2">
-            <label htmlFor={inputId} className="font-semibold text-text">{label}</label>
-            <textarea id={inputId}
-                className="px-3 py-1.5 rounded outline-0 focus:ring-0 border border-gray focus:border-primary focus-visible:border-primary resize-none field-sizing-content min-h-80" />
-        </div>
+
+        <textarea
+            id={inputId}
+            className={cn("px-3 py-1.5 rounded dark:text-text outline-0 focus:ring-0 border border-gray focus:border-primary focus-visible:border-primary resize-none field-sizing-content min-h-80", className)}
+            {...props}
+        />
     )
 }

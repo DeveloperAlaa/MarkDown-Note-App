@@ -7,11 +7,16 @@ import "./styles.css"
 import { createBrowserRouter, RouterProvider } from 'react-router'
 
 import Home from './routes/home'
+import New from './routes/new'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />
+  },
+  {
+    path: "/new",
+    element: <New />
   }
 ])
 

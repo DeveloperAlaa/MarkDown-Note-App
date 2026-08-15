@@ -8,7 +8,7 @@ type CardProps = {
 export default function Card({ title, tags }: CardProps) {
     return (
         <div className="space-y-2 p-5 rounded-xl border shadow-primary hover:shadow hover:-translate-y-2 transition duration-300   border-primary">
-            <h3 className="text-xl font-semibold text-gray truncate">{title}</h3>
+            <h3 className="text-xl font-semibold text-gray dark:text-text/90 truncate">{title}</h3>
             <ul className="flex flex-wrap gap-2">
                 {
                     tags.map(({ id, label }) =>
