@@ -1,46 +1,31 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import CreatableSelect from "react-select/creatable";
 
 import Button from "./ui/button";
 import Input from "./ui/form/input";
 import TextArea from "./ui/form/textarea";
-import { useLocalStorage } from "../hooks/useStorage";
 import type { Note, Tag } from "../types";
 
 
+type NoteFormProps = {
+  tags: Tag[]
+  title: string
+  setTitle: React.Dispatch<React.SetStateAction<string>>
+  content: string
+  setContent: React.Dispatch<React.SetStateAction<string>>
+  selectedTags: Tag[]
+  setSelectedTags: React.Dispatch<React.SetStateAction<Tag[]>>
+  onCreateOption: (value: string) => void
+  onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void
+}
 
-export default function NoteForm() {
 
-  const navigate = useNavigate()
-
-  const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", [])
-  const [notes, setNotes] = useLocalStorage<Omit<Note, "tags">[]>("NOTES", [])
-
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([])
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
+export default function NoteForm({  tags, title, selectedTags, content, onCreateOption, onSubmit, setTitle, setContent, setSelectedTags }: NoteFormProps) {
 
 
-  const onCreateOption = (newOption: string) => {
-    const newTag = { value: crypto.randomUUID(), label: newOption.toLocaleLowerCase() }
-    setTags(prev => [...prev, newTag])
-    setSelectedTags(prev => [...prev, newTag])
-  }
 
   return (
-    <form onSubmit={(e) => {
-      if (!title.trim() || !content.trim())
-         return
-        
-      e.preventDefault()
-      const newNote: Omit<Note, "tags"> = { id: crypto.randomUUID(), title, content, tagsId: selectedTags.map(tag => tag.value) }
-      console.log(newNote);
-      setNotes(prev => [...prev, newNote])
-      navigate("/")
-
-
-    }} className="space-y-5 pb-5">
+    <form onSubmit={onSubmit} className="space-y-5 pb-5">
       <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
         <div className="md:flex-1">
           <div className="flex flex-col gap-2">
@@ -90,7 +75,7 @@ export default function NoteForm() {
       </div>
       <div className="flex justify-end items-center gap-4">
         <Button type="submit">Save</Button>
-        <Link to="/">
+        <Link to="..">
           <Button type="button" variant={"outline"}>Cancel</Button>
         </Link>
       </div>

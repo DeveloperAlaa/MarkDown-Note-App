@@ -4,10 +4,12 @@ import { createRoot } from 'react-dom/client'
 import "./styles.css"
 
 
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router'
 
 import Home from './routes/home'
 import New from './routes/new'
+import Note from './routes/note'
+import Edit from './routes/edit'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,18 @@ const router = createBrowserRouter([
   {
     path: "/new",
     element: <New />
+  },
+  {
+    path: "/:id",
+    element: <Note />
+  },
+  {
+    path: "/:id/edit",
+    element: <Edit />
+  },
+  {
+    path: "*",
+    element: <Navigate to="/" />
   }
 ])
 

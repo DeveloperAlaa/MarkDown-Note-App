@@ -1,8 +1,9 @@
+import type { Tag as TagType } from "../types";
 import Tag from "./ui/tag";
 
 type CardProps = {
     title: string;
-    tags: { id: string, label: string }[]
+    tags: TagType[]
 }
 
 export default function Card({ title, tags }: CardProps) {
@@ -11,8 +12,8 @@ export default function Card({ title, tags }: CardProps) {
             <h3 className="text-xl font-semibold text-gray dark:text-text/90 truncate">{title}</h3>
             <ul className="flex flex-wrap gap-2">
                 {
-                    tags.map(({ id, label }) =>
-                        (<li key={id}><Tag label={label} /></li>))
+                    tags.map(({ value, label }) =>
+                        (<li key={value}><Tag label={label} /></li>))
                 }
             </ul>
         </div>
